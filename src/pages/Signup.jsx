@@ -78,7 +78,7 @@ const Signup = () => {
                         <div className="flex justify-center mb-6">
                             <ProfilePhotoSelector image={profileImage} setImage={setProfileImage}/>
                         </div>
-                        <div className="grid grid-cols-2 md:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-1">
                             <Input
                                 value={fullName}
                                 onchange={(e) => setFullName(e.target.value)}
@@ -86,6 +86,8 @@ const Signup = () => {
                                 placeholder="Enter your full name"
                                 type="text"
                             />
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-1">
                             <Input
                                 value={email}
                                 onchange={(e) => setEmail(e.target.value)}
@@ -93,15 +95,15 @@ const Signup = () => {
                                 placeholder="example@gmail.com"
                                 type="text"
                             />
-                            <div className="col-span-2">
-                                <Input
-                                    value={password}
-                                    onchange={(e) => setPassword(e.target.value)}
-                                    label="Password"
-                                    placeholder="********"
-                                    type="password"
-                                />
-                            </div>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-1">
+                            <Input
+                                value={password}
+                                onchange={(e) => setPassword(e.target.value)}
+                                label="Password"
+                                placeholder="********"
+                                type="password"
+                            />
                         </div>
                         {error && (
                             <p className="text-red-500 text-sm text-center bg-red-50 p-2 rounded">{error}</p>
