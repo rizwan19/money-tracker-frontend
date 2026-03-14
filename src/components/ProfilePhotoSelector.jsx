@@ -70,7 +70,7 @@ const ProfilePhotoSelector = ({image, setImage}) => {
                     <button
                         type="button"
                         onClick={onChooseFile}
-                        className="absolute -bottom-1 -right-1 flex h-9 w-9 items-center justify-center rounded-full bg-blue-600 text-white shadow-md transition hover:bg-blue-700"
+                        className="absolute -bottom-1 -right-1 flex h-9 w-9 items-center justify-center rounded-full bg-blue-600 text-white shadow-md transition hover:bg-blue-700 cursor-pointer"
                         aria-label="Upload profile photo"
                     >
                         <Camera size={16} />

@@ -3,7 +3,6 @@ import {AppContext} from "../context/AppContext.jsx";
 import {useNavigate} from "react-router-dom";
 import {LogOut, Menu, User, X} from "lucide-react";
 import {assets} from "../assets/assets.js";
-import Login from "../pages/Login.jsx";
 import Sidebar from "./Sidebar.jsx";
 
 const MenuBar = ({activeMenu}) => {
@@ -56,7 +55,7 @@ const MenuBar = ({activeMenu}) => {
 
             {/* right side */}
             <div className="relative" ref={dropdownRef}>
-                <button className="flex items-center justify-center w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-800 focus:ring-offset-2"
+                <button className="flex items-center justify-center w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-800 focus:ring-offset-2 cursor-pointer"
                         onClick={() => setShowDropdown(!showDropdown)}>
                     <User className="text-purple-500" />
                 </button>
