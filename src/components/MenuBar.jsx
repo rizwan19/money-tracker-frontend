@@ -81,7 +81,7 @@ const MenuBar = ({openSideMenu, setOpenSideMenu}) => {
                         <div className="py-1">
                             <button
                                 onClick={handleLogout}
-                                className="flex items-center gap-3 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors duration-150">
+                                className="flex items-center gap-3 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors duration-150 cursor-pointer">
                                 <LogOut className="w-4 h-4 text-gray-500" />
                                 Logout
                             </button>
