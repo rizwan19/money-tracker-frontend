@@ -1,6 +1,25 @@
 import CustomPieChart from "./CustomPieChart.jsx";
 import {addThousandSeparator} from "../util/util.js";
 
+const formatCompactCurrency = (amount) => {
+    const numericAmount = Number(amount);
+
+    if (!Number.isFinite(numericAmount)) {
+        return "$0";
+    }
+
+    if (Math.abs(numericAmount) < 100000) {
+        return `$${addThousandSeparator(numericAmount)}`;
+    }
+
+    return new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        notation: "compact",
+        maximumFractionDigits: 1
+    }).format(numericAmount);
+};
+
 const FinanceOverview = ({totalBalance, totalIncome, totalExpense}) => {
 
     const colors = ["#59168B", "#a0090e", "#016630"];
@@ -18,7 +37,7 @@ const FinanceOverview = ({totalBalance, totalIncome, totalExpense}) => {
             <CustomPieChart
                 data={balanceData}
                 label="Total Balance"
-                totalAmount={`$${addThousandSeparator(totalBalance)}`}
+                totalAmount={formatCompactCurrency(totalBalance)}
                 colors={colors}
                 showTextAnchor={true}
             />

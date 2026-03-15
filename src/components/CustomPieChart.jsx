@@ -17,14 +17,26 @@ const renderCenterText = ({viewBox, label, totalAmount, showTextAnchor}) => {
     }
 
     const {cx, cy} = viewBox;
+    const amountText = String(totalAmount || "");
+    const amountLength = amountText.length;
+    const amountFontSize = amountLength > 14 ? 13 : amountLength > 11 ? 16 : 20;
+    const amountTextLength = amountLength > 11 ? 110 : undefined;
 
     return (
         <text x={cx} y={cy} textAnchor="middle" dominantBaseline="middle">
             <tspan x={cx} dy="-0.6em" fill="#94a3b8" fontSize="12">
                 {label}
             </tspan>
-            <tspan x={cx} dy="1.6em" fill="#0f172a" fontSize="20" fontWeight="600">
-                {totalAmount}
+            <tspan
+                x={cx}
+                dy="1.6em"
+                fill="#0f172a"
+                fontSize={amountFontSize}
+                fontWeight="600"
+                lengthAdjust={amountTextLength ? "spacingAndGlyphs" : undefined}
+                textLength={amountTextLength}
+            >
+                {amountText}
             </tspan>
         </text>
     );
