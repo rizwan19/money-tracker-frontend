@@ -84,7 +84,7 @@ const Home = () => {
                         <Transactions
                             transactions={dashboardData?.recentFiveExpenses || []}
                             onMore={() => navigate("/expense")}
-                            type="expense"
+                            type="EXPENSE"
                             title="Recent Expenses"
                             loading={loading}
                         />
@@ -93,7 +93,7 @@ const Home = () => {
                         <Transactions
                             transactions={dashboardData?.recentFiveIncomes || []}
                             onMore={() => navigate("/income")}
-                            type="income"
+                            type="INCOME"
                             title="Recent Incomes"
                             loading={loading}
                         />
