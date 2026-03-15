@@ -6,6 +6,7 @@ import Category from "./pages/Category.jsx";
 import Income from "./pages/Income.jsx";
 import Expense from "./pages/Expense.jsx";
 import Filter from "./pages/Filter.jsx";
+import ActivationAccount from "./pages/ActivationAccount.jsx";
 import { Toaster } from 'react-hot-toast';
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
                     <Route path="/dashboard" element={<Home/>} />
                     <Route path="/signup" element={<Signup/>} />
                     <Route path="/login" element={<Login/>} />
+                    <Route path="/activate-account" element={<ActivationAccount/>} />
                     <Route path="/category" element={<Category/>} />
                     <Route path="/income" element={<Income/>} />
                     <Route path="/expense" element={<Expense/>} />

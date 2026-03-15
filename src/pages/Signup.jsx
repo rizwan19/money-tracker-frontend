@@ -5,7 +5,6 @@ import Input from "../components/input.jsx";
 import {validateEmail} from "../util/validation.js";
 import axiosConfig from "../util/axiosConfig.jsx";
 import {API_ENDPOINTS} from "../util/apiEndpoints.js";
-import toast from "react-hot-toast";
 import {LoaderCircle} from "lucide-react";
 import ProfilePhotoSelector from "../components/ProfilePhotoSelector.jsx";
 import uploadProfileImage from "../util/uploadProfileImage.js";
@@ -54,8 +53,14 @@ const Signup = () => {
                 profileImageUrl
             })
             if (response.status === 201) {
-                toast.success("Account created successfully! Please login.");
-                navigate("/login");
+                navigate("/login", {
+                    state: {
+                        postSignupNotice: {
+                            type: "success",
+                            message: "Account created successfully. Please verify your email before logging in."
+                        }
+                    }
+                });
             }
         } catch(err) {
             console.error("Something went wrong: " + err);
@@ -128,7 +133,6 @@ const Signup = () => {
                     </form>
                 </div>
             </div>
-
         </div>
     )
 }

@@ -1,5 +1,5 @@
-import {useContext, useState} from "react";
-import {Link, useNavigate} from "react-router-dom";
+import {useContext, useEffect, useState} from "react";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {assets} from "../assets/assets.js";
 import Input from "../components/input.jsx";
 import {validateEmail} from "../util/validation.js";
@@ -7,6 +7,7 @@ import axiosConfig from "../util/axiosConfig.jsx";
 import {API_ENDPOINTS} from "../util/apiEndpoints.js";
 import {AppContext} from "../context/AppContext.jsx";
 import {LoaderCircle} from "lucide-react";
+import toast from "react-hot-toast";
 
 const Login = () => {
 
@@ -14,8 +15,23 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+    const location = useLocation();
     const [isLoading, setIsLoading] = useState(false);
     const { setUser } = useContext(AppContext);
+
+    useEffect(() => {
+        const notice = location.state?.postSignupNotice;
+
+        if (!notice) {
+            return;
+        }
+
+        if (notice.type === "success") {
+            toast.success(notice.message);
+        }
+
+        navigate(location.pathname, {replace: true, state: null});
+    }, [location.pathname, location.state, navigate]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
