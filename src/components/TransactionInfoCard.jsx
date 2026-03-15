@@ -2,7 +2,7 @@ import {Trash2, TrendingDown, TrendingUp, UtensilsCrossed} from "lucide-react";
 import {addThousandSeparator} from "../util/util.js";
 
 const TransactionInfoCard = ({icon, title, date, amount, type, hideDeleteButton, onDelete}) => {
-    const getAmountStyles = () => type === 'income' ? 'bg-green-50 text-green-800': 'bg-red-50 text-red-800';
+    const getAmountStyles = () => type === 'INCOME' ? 'bg-green-50 text-green-800': 'bg-red-50 text-red-800';
     return (
         <div className="group relative flex items-center gap-4 mt-2 p-3 rounded-lg hover:bg-gray-100/60">
             <div className="w-12 h-12 flex items-center justify-center text-xl text-gray-800 bg-gray-100 rounded-full">
@@ -28,9 +28,9 @@ const TransactionInfoCard = ({icon, title, date, amount, type, hideDeleteButton,
                 </div>
                 <div className={`flex items-center gap-2 px-3 py-1.5 rounded-md ${getAmountStyles()}`}>
                     <h6 className="text-xs font-medium">
-                        {type === "income" ? '+' : '-'} ${addThousandSeparator(amount)}
+                        {type === "INCOME" ? '+' : '-'} ${addThousandSeparator(amount)}
                     </h6>
-                    {type === 'income' ? (
+                    {type === 'INCOME' ? (
                         <TrendingUp size={15} />
                     ) : (
                         <TrendingDown size={15} />
