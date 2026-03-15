@@ -70,6 +70,7 @@ const Home = () => {
                         <RecentTransactions
                             transactions={dashboardData?.recentTransactions}
                             onMore={() => navigate("/expense")}
+                            loading={loading}
                         />
 
                         {/* Finance overview chart */}
@@ -85,6 +86,7 @@ const Home = () => {
                             onMore={() => navigate("/expense")}
                             type="expense"
                             title="Recent Expenses"
+                            loading={loading}
                         />
 
                         {/* Income transactions */}
@@ -93,6 +95,7 @@ const Home = () => {
                             onMore={() => navigate("/income")}
                             type="income"
                             title="Recent Incomes"
+                            loading={loading}
                         />
                     </div>
                 </div>
