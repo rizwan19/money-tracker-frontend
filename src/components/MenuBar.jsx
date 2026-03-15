@@ -3,10 +3,8 @@ import {AppContext} from "../context/AppContext.jsx";
 import {useNavigate} from "react-router-dom";
 import {LogOut, Menu, User, X} from "lucide-react";
 import {assets} from "../assets/assets.js";
-import Sidebar from "./Sidebar.jsx";
 
-const MenuBar = ({activeMenu}) => {
-    const [openSideMenu, setOpenSideMenu] = useState(false);
+const MenuBar = ({openSideMenu, setOpenSideMenu}) => {
     const [showDropdown, setShowDropdown] = useState(false);
     const dropdownRef = useRef(null);
     const {user, clearUser} = useContext(AppContext);
@@ -40,9 +38,9 @@ const MenuBar = ({activeMenu}) => {
             <div className="flex items-center gap-5">
                 <button
                     onClick={() => setOpenSideMenu(!openSideMenu)}
-                    className="block lg-hidden text-black hover:bg-gray-100 p-1 rounded transition-colors">
+                    className="block lg:hidden text-black hover:bg-gray-100 p-1 rounded transition-colors">
                     {(openSideMenu ? (
-                    <X className="text-2xl"/>
+                        <X className="text-2xl"/>
                     ): (
                         <Menu className="text-2xl"/>
                     ))}
@@ -92,12 +90,6 @@ const MenuBar = ({activeMenu}) => {
                 )}
             </div>
 
-            {/* mobile side menu */}
-            {openSideMenu && (
-                <div className="fixed left-0 right-0 bg-white border-b border-gray-200 lg:hidden z-20 top-[73px]">
-                    <Sidebar activeMenu={activeMenu}/>
-                </div>
-            )}
         </div>
     )
 }

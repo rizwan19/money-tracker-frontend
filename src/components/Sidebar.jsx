@@ -4,12 +4,20 @@ import {SIDEBAR_DATA} from "../assets/assets.js";
 import {useNavigate} from "react-router-dom";
 import {User} from "lucide-react";
 
-const Sidebar = ({activeMenu}) => {
+const Sidebar = ({activeMenu, onItemClick, variant = "desktop"}) => {
     const {user} = useContext(AppContext);
     const navigate = useNavigate();
+    const sidebarClassName = variant === "mobile"
+        ? "w-full max-h-[calc(100vh-73px)] overflow-y-auto bg-white p-5"
+        : "w-64 h-[calc(100vh-61px)] bg-white border-gray-200/50 p-5 sticky top-[61px] z-20";
+
+    const handleMenuClick = (path) => {
+        navigate(path);
+        onItemClick?.();
+    };
 
     return (
-        <div className="w-64 h-[calc(100vh-61px)] bg-white border-gray-200/50 p-5 sticky top-[61px] z-20">
+        <div className={sidebarClassName}>
             <div className="flex flex-col items-center justify-center gap-3 mt-3 mb-7">
                 {user?.profileImageUrl ? (
                     <img src={user?.profileImageUrl || ""}
@@ -22,7 +30,7 @@ const Sidebar = ({activeMenu}) => {
             </div>
             {SIDEBAR_DATA.map((item) => (
                 <button
-                    onClick={() => navigate(item.path)}
+                    onClick={() => handleMenuClick(item.path)}
                     key={`menu_${item.id}`}
                     className={`cursor-pointer w-full flex items-center gap-4 text-[15px] py-3 px-6 rounded-lg mb-3 ${activeMenu === item.label ? "text-white bg-purple-800" : ""}`}>
                     {item.label}

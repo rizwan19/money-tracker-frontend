@@ -52,6 +52,7 @@ body {
   background-color: #ffffff;
   padding: 0.625rem 1rem;
   color: #0f172a;
+  cursor: pointer;
   font-size: 0.875rem;
   font-weight: 600;
   line-height: 1;
