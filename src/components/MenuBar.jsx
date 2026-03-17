@@ -19,6 +19,11 @@ const MenuBar = ({openSideMenu, setOpenSideMenu}) => {
         navigate("/login");
     }
 
+    const handleBrandClick = () => {
+        setOpenSideMenu(false);
+        navigate("/dashboard");
+    }
+
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -45,10 +50,13 @@ const MenuBar = ({openSideMenu, setOpenSideMenu}) => {
                         <Menu className="text-2xl"/>
                     ))}
                 </button>
-                <div className="flex items-center gap-2">
+                <button
+                    type="button"
+                    onClick={handleBrandClick}
+                    className="flex items-center gap-2 bg-transparent border-0 p-0 cursor-pointer focus:outline-none">
                     <img src={assets.logo} alt="Logo" className="h-10 w-10" />
                     <span className="text-xl font-medium text-black truncate">Money Manager</span>
-                </div>
+                </button>
             </div>
 
             {/* right side */}
