@@ -19,8 +19,20 @@ const Filter = () => {
     const [transaction, setTransaction] = useState([]);
     const [loading, setLoading] = useState(false);
 
+    const validateDateRange = () => {
+        if (startDate && endDate && startDate > endDate) {
+            toast.error("Start date cannot be later than end date");
+            return false;
+        }
+
+        return true;
+    }
+
     const handleSearch = async (e) => {
         e.preventDefault();
+        if (!validateDateRange()) {
+            return;
+        }
         setLoading(true)
 
         try {
