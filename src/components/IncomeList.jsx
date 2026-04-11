@@ -3,7 +3,7 @@ import TransactionInfoCard from "./TransactionInfoCard.jsx";
 import moment from "moment";
 import {useState} from "react";
 
-const IncomeList = ({transactions, onDelete, onDownload, onEmail}) => {
+const IncomeList = ({transactions, onDelete, onDownload, onEmail, onEditIncome}) => {
 
     const [loading, setLoading] = useState(false);
 
@@ -63,6 +63,7 @@ const IncomeList = ({transactions, onDelete, onDownload, onEmail}) => {
                         date={moment(income.date).format('Do MMM YYYY')}
                         amount={income.amount}
                         type="INCOME"
+                        onEdit={() => onEditIncome(income)}
                         onDelete={() => onDelete(income.id)}
                     />
                 ))}

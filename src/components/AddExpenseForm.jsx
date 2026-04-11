@@ -3,7 +3,7 @@ import EmojiPickerPopup from "./EmojiPickerPopup.jsx";
 import Input from "./input.jsx";
 import {LoaderCircle} from "lucide-react";
 
-const AddExpenseForm = ({onAddExpense, categories}) => {
+const AddExpenseForm = ({onAddExpense, categories, initialExpenseData, isEditing}) => {
     const [loading, setLoading] = useState(false);
     const [expense, setExpense] = useState({
         name: '',
@@ -32,10 +32,13 @@ const AddExpenseForm = ({onAddExpense, categories}) => {
     }
 
     useEffect(() => {
-        if (categories.length > 0 && !expense.categoryId) {
+        if (isEditing && initialExpenseData) {
+            setExpense(initialExpenseData);
+        }
+        else if (categories.length > 0 && !expense.categoryId) {
             setExpense((prev) => ({...prev, categoryId: categories[0].id}))
         }
-    }, [categories, expense.categoryId]);
+    }, [categories, expense.categoryId, isEditing, initialExpenseData]);
 
     return (
         <div className="">
@@ -76,15 +79,16 @@ const AddExpenseForm = ({onAddExpense, categories}) => {
                     className="add-btn add-btn-fill"
                     disabled={loading}
                     onClick={() => handleAddExpense(expense)}
-                    >{loading ? (
+                    >
+                    {loading ? (
                         <>
-                            <LoaderCircle className="w-4 h-4 animate-spin" />Adding...
+                            <LoaderCircle className="w-4 h-4 animate-spin" />
+                            {isEditing ? "Updating..." : "Adding..."}
                         </>
-                ) : (
-                    <>
-                        Add Expense
-                    </>
-                )}</button>
+                    ) : (
+                        <>{isEditing ? "Update Expense" : "Add Expense"}</>
+                    )}
+                </button>
             </div>
         </div>
     )

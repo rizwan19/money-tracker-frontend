@@ -73,6 +73,7 @@ const Category = () => {
     const handleUpdateCategory = async (category) => {
         setLoading(true);
         const {id, name, type, icon} = category;
+        console.log(category);
 
         if (!name.trim()) {
             toast.error("Category name is required");

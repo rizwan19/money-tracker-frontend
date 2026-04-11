@@ -3,7 +3,7 @@ import TransactionInfoCard from "./TransactionInfoCard.jsx";
 import moment from "moment";
 import {useState} from "react";
 
-const ExpenseList = ({transactions, onDelete, onDownload, onEmail}) => {
+const ExpenseList = ({transactions, onDelete, onDownload, onEmail, onEditExpense}) => {
 
     const [loading, setLoading] = useState(false);
 
@@ -63,6 +63,7 @@ const ExpenseList = ({transactions, onDelete, onDownload, onEmail}) => {
                         date={moment(expense.date).format('Do MMM YYYY')}
                         amount={expense.amount}
                         type="EXPENSE"
+                        onEdit={() => onEditExpense(expense)}
                         onDelete={() => onDelete(expense.id)}
                     />
                 ))}

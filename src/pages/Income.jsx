@@ -17,10 +17,17 @@ const Income = () => {
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(false);
     const [openAddIncomeModal, setOpenAddIncomeModal] = useState(false);
+    const [openEditIncomeModal, setOpenEditIncomeModal] = useState(false);
+    const [selectedIncome, setSelectedIncome] = useState(null);
     const [openDeleteAlert, setOpenDeleteAlert] = useState({
         show: false,
         data: null
     })
+    const handleEditIncome = async (income) => {
+        setSelectedIncome(income);
+        setOpenEditIncomeModal(true);
+    }
+
     const fetchIncomeDetails = async () => {
         if (loading)
             return;
@@ -50,6 +57,51 @@ const Income = () => {
         }
     }
 
+    const handleUpdateIncome = async (income) => {
+        setLoading(true);
+        const {id, name, amount, date, icon, categoryId} = income;
+
+        if (!name.trim()) {
+            toast.error("Please enter a name");
+            setLoading(false);
+            return;
+        }
+        if (!amount || isNaN(amount) || Number(amount)<=0) {
+            toast.error("Amount should be a valid number");
+            setLoading(false);
+            return;
+        }
+        if (!date) {
+            toast.error("Date is required");
+            setLoading(false);
+            return;
+        }
+        const today = new Date().toISOString().split('T')[0];
+        if (date > today) {
+            toast.error("Date cannot be in the future");
+            setLoading(false);
+            return;
+        }
+        if (!categoryId) {
+            toast.error("Category is required");
+            setLoading(false);
+            return;
+        }
+        try {
+            console.log(categoryId)
+            await axiosConfig.put(API_ENDPOINTS.UPDATE_INCOME(id), {name, amount, date, icon, categoryId});
+            setOpenEditIncomeModal(false);
+            setSelectedIncome(null);
+            toast.success("Income updated successfully");
+            await fetchIncomeDetails();
+        } catch (error) {
+            toast.error(error.response?.data?.message || "Failed to update income");
+            setLoading(false);
+        } finally {
+            setLoading(false);
+        }
+    }
+
     const handleAddIncome = async (income) => {
         setLoading(true);
         const {name, amount, date, icon, categoryId} = income;
@@ -76,7 +128,6 @@ const Income = () => {
             return;
         }
         if (!categoryId) {
-            console.log(categoryId);
             toast.error("Category is required");
             setLoading(false);
             return;
@@ -162,6 +213,7 @@ const Income = () => {
                     <IncomeList transactions={incomeData}
                                 onDownload={handleDownloadIncomeDetails}
                                 onEmail={handleEmailIncomeDetails}
+                                onEditIncome={handleEditIncome}
                                 onDelete={(id) => setOpenDeleteAlert({show: true, data: id})}
                     />
 
@@ -172,6 +224,21 @@ const Income = () => {
                         title="Add Income"
                         >
                         <AddIncomeForm onAddIncome={(income) => handleAddIncome(income)} categories={categories} />
+                    </Modal>
+
+                    {/* edit income modal */}
+                    <Modal
+                        isOpen={openEditIncomeModal}
+                        onClose={() => {setOpenEditIncomeModal(false)
+                            setSelectedIncome(null)}}
+                        title="Edit Income"
+                    >
+                        <AddIncomeForm
+                            initialIncomeData={selectedIncome}
+                            onAddIncome={handleUpdateIncome}
+                            categories={categories}
+                            isEditing={true}
+                        />
                     </Modal>
 
                     {/* Delete income modal */}

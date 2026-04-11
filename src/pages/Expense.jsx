@@ -17,10 +17,17 @@ const Expense = () => {
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(false);
     const [openAddExpenseModal, setOpenAddExpenseModal] = useState(false);
+    const [openEditExpenseModal, setOpenEditExpenseModal] = useState(false);
+    const [selectedExpense, setSelectedExpense] = useState(null);
     const [openDeleteAlert, setOpenDeleteAlert] = useState({
         show: false,
         data: null
     })
+    const handleEditExpense = (expense) => {
+        setSelectedExpense(expense);
+        setOpenEditExpenseModal(true);
+    }
+
     const fetchExpenseDetails = async () => {
         if (loading)
             return;
@@ -47,6 +54,50 @@ const Expense = () => {
             }
         } catch (error) {
             toast.error(error.response?.data?.message || "Failed to fetch expense categories");
+        }
+    }
+
+    const handleUpdateExpense = async (expense) => {
+        setLoading(true);
+        const {id, name, amount, date, icon, categoryId} = expense;
+
+        if (!name.trim()) {
+            toast.error("Please enter a name");
+            setLoading(false);
+            return;
+        }
+        if (!amount || isNaN(amount) || Number(amount)<=0) {
+            toast.error("Amount should be a valid number");
+            setLoading(false);
+            return;
+        }
+        if (!date) {
+            toast.error("Date is required");
+            setLoading(false);
+            return;
+        }
+        const today = new Date().toISOString().split('T')[0];
+        if (date > today) {
+            toast.error("Date cannot be in the future");
+            setLoading(false);
+            return;
+        }
+        if (!categoryId) {
+            toast.error("Category is required");
+            setLoading(false);
+            return;
+        }
+        try {
+            await axiosConfig.put(API_ENDPOINTS.UPDATE_EXPENSE(id), {name, amount, date, icon, categoryId});
+            setOpenEditExpenseModal(false);
+            setSelectedExpense(null);
+            toast.success("Expense updated successfully");
+            await fetchExpenseDetails();
+        } catch (error) {
+            toast.error(error.response?.data?.message || "Failed to update expense");
+            setLoading(false);
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -162,6 +213,7 @@ const Expense = () => {
                     <ExpenseList transactions={expenseData}
                                 onDownload={handleDownloadExpenseDetails}
                                 onEmail={handleEmailExpenseDetails}
+                                 onEditExpense={handleEditExpense}
                                 onDelete={(id) => setOpenDeleteAlert({show: true, data: id})}
                     />
 
@@ -172,6 +224,21 @@ const Expense = () => {
                         title="Add Expense"
                     >
                         <AddExpenseForm onAddExpense={(expense) => handleAddExpense(expense)} categories={categories} />
+                    </Modal>
+
+                    {/* edit expense modal */}
+                    <Modal
+                        isOpen={openEditExpenseModal}
+                        onClose={() => {setOpenEditExpenseModal(false)
+                            setSelectedExpense(null)}}
+                        title="Edit Expense"
+                    >
+                        <AddExpenseForm
+                            initialExpenseData={selectedExpense}
+                            onAddExpense={handleUpdateExpense}
+                            categories={categories}
+                            isEditing={true}
+                        />
                     </Modal>
 
                     {/* Delete expense modal */}
