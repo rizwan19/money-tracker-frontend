@@ -38,7 +38,7 @@ const AddExpenseForm = ({onAddExpense, categories, initialExpenseData, isEditing
         else if (categories.length > 0 && !expense.categoryId) {
             setExpense((prev) => ({...prev, categoryId: categories[0].id}))
         }
-    }, [categories, expense.categoryId, isEditing, initialExpenseData]);
+    }, [categories, isEditing, initialExpenseData]);
 
     return (
         <div className="">

@@ -38,7 +38,7 @@ const AddIncomeForm = ({onAddIncome, categories, initialIncomeData, isEditing}) 
         else if (categories.length > 0 && !income.categoryId) {
             setIncome((prev) => ({...prev, categoryId: categories[0].id}))
         }
-    }, [categories, income.categoryId, isEditing, initialIncomeData]);
+    }, [categories, isEditing, initialIncomeData]);
 
     return (
         <div className="">

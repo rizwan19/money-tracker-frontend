@@ -10,6 +10,8 @@ import DeleteAlert from "../components/DeleteAlert.jsx";
 import Overview from "../components/Overview.jsx";
 import AddExpenseForm from "../components/AddExpenseForm.jsx";
 
+const TRANSACTION_TYPE = "expense";
+
 const Expense = () => {
     const expenseMessage = "Track your expenses over time and analyze your expense trends.";
     useUser();
@@ -34,7 +36,7 @@ const Expense = () => {
         setLoading(true);
 
         try {
-            const response = await axiosConfig.get(API_ENDPOINTS.GET_ALL_EXPENSE);
+            const response = await axiosConfig.get(API_ENDPOINTS.GET_TRANSACTIONS(TRANSACTION_TYPE));
             if (response.status === 200)
                 setExpenseData(response.data);
         } catch (error) {
@@ -47,7 +49,7 @@ const Expense = () => {
 
     const fetchExpenseCategories = async () => {
         try {
-            const response = await axiosConfig.get(API_ENDPOINTS.CATEGORY_BY_TYPE("expense"));
+            const response = await axiosConfig.get(API_ENDPOINTS.CATEGORY_BY_TYPE(TRANSACTION_TYPE));
 
             if (response.status === 200) {
                 setCategories(response.data);
@@ -88,7 +90,14 @@ const Expense = () => {
             return;
         }
         try {
-            await axiosConfig.put(API_ENDPOINTS.UPDATE_EXPENSE(id), {name, amount, date, icon, categoryId});
+            await axiosConfig.put(API_ENDPOINTS.UPDATE_TRANSACTION(id), {
+                name,
+                amount: Number(amount),
+                date,
+                icon,
+                categoryId,
+                type: TRANSACTION_TYPE
+            });
             setOpenEditExpenseModal(false);
             setSelectedExpense(null);
             toast.success("Expense updated successfully");
@@ -127,14 +136,14 @@ const Expense = () => {
             return;
         }
         if (!categoryId) {
-            console.log(categoryId);
             toast.error("Category is required");
             setLoading(false);
             return;
         }
 
         try {
-            const response = await axiosConfig.post(API_ENDPOINTS.ADD_EXPENSE, {
+            const response = await axiosConfig.post(API_ENDPOINTS.ADD_TRANSACTION, {
+                type: TRANSACTION_TYPE,
                 name,
                 amount: Number(amount),
                 date,
@@ -158,7 +167,7 @@ const Expense = () => {
 
     const deleteExpense = async (id) => {
         try {
-            await axiosConfig.delete(API_ENDPOINTS.DELETE_EXPENSE(id));
+            await axiosConfig.delete(API_ENDPOINTS.DELETE_TRANSACTION(id));
             setOpenDeleteAlert({show: false, data: null});
             toast.success("Expense deleted successfully");
             fetchExpenseDetails();
@@ -169,7 +178,7 @@ const Expense = () => {
 
     const handleDownloadExpenseDetails = async () => {
         try {
-            const response = await axiosConfig.get(API_ENDPOINTS.EXPENSE_EXCEL_DOWNLOAD, {responseType: "blob"});
+            const response = await axiosConfig.get(API_ENDPOINTS.TRANSACTION_EXCEL_DOWNLOAD(TRANSACTION_TYPE), {responseType: "blob"});
             let fileName = "expense_details.xlsx";
             const url = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement("a");
@@ -186,7 +195,7 @@ const Expense = () => {
     }
     const handleEmailExpenseDetails = async () => {
         try {
-            const response = await axiosConfig.get(API_ENDPOINTS.EMAIL_EXPENSE);
+            const response = await axiosConfig.get(API_ENDPOINTS.EMAIL_TRANSACTION(TRANSACTION_TYPE));
             if (response.status === 200)
                 toast.success("Expense details emailed successfully");
         } catch (error) {

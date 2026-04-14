@@ -10,6 +10,8 @@ import AddIncomeForm from "../components/AddIncomeForm.jsx";
 import DeleteAlert from "../components/DeleteAlert.jsx";
 import Overview from "../components/Overview.jsx";
 
+const TRANSACTION_TYPE = "income";
+
 const Income = () => {
     const incomeMessage = "Track your earnings over time and analyze your income trends.";
     useUser();
@@ -34,7 +36,7 @@ const Income = () => {
         setLoading(true);
 
         try {
-            const response = await axiosConfig.get(API_ENDPOINTS.GET_ALL_INCOME);
+            const response = await axiosConfig.get(API_ENDPOINTS.GET_TRANSACTIONS(TRANSACTION_TYPE));
             if (response.status === 200)
                 setIncomeData(response.data);
         } catch (error) {
@@ -47,7 +49,7 @@ const Income = () => {
 
     const fetchIncomeCategories = async () => {
         try {
-            const response = await axiosConfig.get(API_ENDPOINTS.CATEGORY_BY_TYPE("income"));
+            const response = await axiosConfig.get(API_ENDPOINTS.CATEGORY_BY_TYPE(TRANSACTION_TYPE));
 
             if (response.status === 200) {
                 setCategories(response.data);
@@ -88,8 +90,14 @@ const Income = () => {
             return;
         }
         try {
-            console.log(categoryId)
-            await axiosConfig.put(API_ENDPOINTS.UPDATE_INCOME(id), {name, amount, date, icon, categoryId});
+            await axiosConfig.put(API_ENDPOINTS.UPDATE_TRANSACTION(id), {
+                name,
+                amount: Number(amount),
+                date,
+                icon,
+                categoryId,
+                type: TRANSACTION_TYPE
+            });
             setOpenEditIncomeModal(false);
             setSelectedIncome(null);
             toast.success("Income updated successfully");
@@ -134,7 +142,8 @@ const Income = () => {
         }
 
         try {
-            const response = await axiosConfig.post(API_ENDPOINTS.ADD_INCOME, {
+            const response = await axiosConfig.post(API_ENDPOINTS.ADD_TRANSACTION, {
+                type: TRANSACTION_TYPE,
                 name,
                 amount: Number(amount),
                 date,
@@ -158,7 +167,7 @@ const Income = () => {
 
     const deleteIncome = async (id) => {
         try {
-            await axiosConfig.delete(API_ENDPOINTS.DELETE_INCOME(id));
+            await axiosConfig.delete(API_ENDPOINTS.DELETE_TRANSACTION(id));
             setOpenDeleteAlert({show: false, data: null});
             toast.success("Income deleted successfully");
             fetchIncomeDetails();
@@ -169,7 +178,7 @@ const Income = () => {
 
     const handleDownloadIncomeDetails = async () => {
         try {
-            const response = await axiosConfig.get(API_ENDPOINTS.INCOME_EXCEL_DOWNLOAD, {responseType: "blob"});
+            const response = await axiosConfig.get(API_ENDPOINTS.TRANSACTION_EXCEL_DOWNLOAD(TRANSACTION_TYPE), {responseType: "blob"});
             let fileName = "income_details.xlsx";
             const url = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement("a");
@@ -186,7 +195,7 @@ const Income = () => {
     }
     const handleEmailIncomeDetails = async () => {
         try {
-            const response = await axiosConfig.get(API_ENDPOINTS.EMAIL_INCOME);
+            const response = await axiosConfig.get(API_ENDPOINTS.EMAIL_TRANSACTION(TRANSACTION_TYPE));
             if (response.status === 200)
                 toast.success("Income details emailed successfully");
         } catch (error) {
