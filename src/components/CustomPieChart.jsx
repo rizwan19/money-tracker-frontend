@@ -1,6 +1,4 @@
 import {Cell, Label, Pie, PieChart as RechartsPieChart, ResponsiveContainer, Tooltip} from "recharts";
-import {addThousandSeparator} from "../util/util.js";
-
 const formatAmount = (value) => {
     const amount = Number(value);
 
@@ -8,7 +6,7 @@ const formatAmount = (value) => {
         return "$0";
     }
 
-    return `$${addThousandSeparator(amount)}`;
+    return `$${amount}`;
 };
 
 const renderCenterText = ({viewBox, label, totalAmount, showTextAnchor}) => {

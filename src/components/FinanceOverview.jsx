@@ -1,5 +1,4 @@
 import CustomPieChart from "./CustomPieChart.jsx";
-import {addThousandSeparator} from "../util/util.js";
 
 const formatCompactCurrency = (amount) => {
     const numericAmount = Number(amount);
@@ -9,7 +8,7 @@ const formatCompactCurrency = (amount) => {
     }
 
     if (Math.abs(numericAmount) < 100000) {
-        return `$${addThousandSeparator(numericAmount)}`;
+        return `$${numericAmount}`;
     }
 
     return new Intl.NumberFormat("en-US", {

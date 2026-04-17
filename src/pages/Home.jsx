@@ -2,7 +2,6 @@ import Dashboard from "../components/Dashboard.jsx";
 import {useUser} from "../hooks/useUser.jsx";
 import InfoCard from "../components/InfoCard.jsx";
 import {Coins, Wallet, WalletCards} from "lucide-react";
-import {addThousandSeparator} from "../util/util.js";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import toast from "react-hot-toast";
@@ -49,19 +48,19 @@ const Home = () => {
                         <InfoCard
                             icon={<WalletCards />}
                             label="Total Balance"
-                            value={addThousandSeparator(dashboardData?.totalBalance || 0)}
+                            value={dashboardData?.totalBalance || 0}
                             color="bg-purple-800"
                         />
                         <InfoCard
                             icon={<Wallet />}
                             label="Total Income"
-                            value={addThousandSeparator(dashboardData?.totalIncome || 0)}
+                            value={dashboardData?.totalIncome || 0}
                             color="bg-purple-800"
                         />
                         <InfoCard
                             icon={<Coins />}
                             label="Total Expense"
-                            value={addThousandSeparator(dashboardData?.totalExpense || 0)}
+                            value={dashboardData?.totalExpense || 0}
                             color="bg-purple-800"
                         />
                     </div>
