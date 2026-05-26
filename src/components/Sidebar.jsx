@@ -8,8 +8,8 @@ const Sidebar = ({activeMenu, onItemClick, variant = "desktop"}) => {
     const {user} = useContext(AppContext);
     const navigate = useNavigate();
     const sidebarClassName = variant === "mobile"
-        ? "w-full max-h-[calc(100vh-73px)] overflow-y-auto bg-white p-5"
-        : "w-64 h-[calc(100vh-61px)] bg-white border-gray-200/50 p-5 sticky top-[61px] z-20";
+        ? "w-full max-h-[calc(100vh-73px)] overflow-y-auto bg-slate-950 p-5"
+        : "w-64 h-[calc(100vh-61px)] bg-slate-950 border-r border-slate-800 p-5 sticky top-[61px] z-20";
 
     const handleMenuClick = (path) => {
         navigate(path);
@@ -22,17 +22,17 @@ const Sidebar = ({activeMenu, onItemClick, variant = "desktop"}) => {
                 {user?.profileImageUrl ? (
                     <img src={user?.profileImageUrl || ""}
                          alt="Profile Image"
-                         className="w-20 h-20 bg-slate-400 rounded-full"/>
+                         className="w-20 h-20 bg-slate-700 rounded-full"/>
                 ): (
-                    <User className="w-20 h-20 text-xl" />
+                    <User className="w-20 h-20 text-xl text-slate-400" />
                 )}
-                <h5 className="text-gray-950 font-medium leading-6">{user.fullName || ""}</h5>
+                <h5 className="text-slate-100 font-medium leading-6">{user.fullName || ""}</h5>
             </div>
             {SIDEBAR_DATA.map((item) => (
                 <button
                     onClick={() => handleMenuClick(item.path)}
                     key={`menu_${item.id}`}
-                    className={`cursor-pointer w-full flex items-center gap-4 text-[15px] py-3 px-6 rounded-lg mb-3 ${activeMenu === item.label ? "text-white bg-purple-800" : ""}`}>
+                    className={`cursor-pointer w-full flex items-center gap-4 text-[15px] py-3 px-6 rounded-lg mb-3 transition-colors ${activeMenu === item.label ? "text-white bg-teal-600" : "text-slate-300 hover:bg-slate-800 hover:text-slate-50"}`}>
                     {item.label}
                 </button>
             ))}

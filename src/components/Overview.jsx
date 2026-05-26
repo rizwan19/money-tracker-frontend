@@ -46,7 +46,7 @@ const Overview = ({transactions, onAdd, message}) => {
                     <h5 className="text-lg">
                         Overview
                     </h5>
-                    <p className="text-xs text-gray-400 mt-1">
+                    <p className="text-xs text-slate-400 mt-1">
                         {message}
                     </p>
                 </div>
@@ -74,7 +74,7 @@ const Overview = ({transactions, onAdd, message}) => {
                         <Line
                             type="monotone"
                             dataKey="amount"
-                            stroke="#2563eb"
+                            stroke="#14b8a6"
                             strokeWidth={3}
                             dot={{r: 4}}
                             activeDot={{r: 6}}

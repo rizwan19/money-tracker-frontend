@@ -15,7 +15,7 @@ const Transactions = ({transactions = [], onMore, type, title, loading = false})
             </div>
             <div className="mt-6">
                 {loading ? (
-                    <div className="flex items-center justify-center py-6 text-gray-500">
+                    <div className="flex items-center justify-center py-6 text-slate-400">
                         <LoaderCircle className="w-5 h-5 animate-spin" />
                     </div>
                 ) : hasTransactions ? (
@@ -31,7 +31,7 @@ const Transactions = ({transactions = [], onMore, type, title, loading = false})
                         />
                     ))
                 ) : (
-                    <p className="text-sm text-gray-500">No Data</p>
+                    <p className="text-sm text-slate-400">No Data</p>
                 )}
             </div>
         </div>

@@ -21,7 +21,7 @@ const formatCompactCurrency = (amount) => {
 
 const FinanceOverview = ({totalBalance, totalIncome, totalExpense}) => {
 
-    const colors = ["#59168B", "#a0090e", "#016630"];
+    const colors = ["#14b8a6", "#ef4444", "#22c55e"];
     const balanceData = [
         {name: "Total Balance", amount: totalBalance},
         {name: "Total Income", amount: totalIncome},

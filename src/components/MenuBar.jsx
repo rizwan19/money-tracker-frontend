@@ -38,12 +38,12 @@ const MenuBar = ({openSideMenu, setOpenSideMenu}) => {
     }, [showDropdown]);
 
     return (
-        <div className="flex items-center justify-between gap-5 bg-white border border-b border-gray-200/50 backdrop-blur-[2px] py-3 px-4 sm:px-7 sticky top-0 z-30">
+        <div className="flex items-center justify-between gap-5 bg-slate-950/95 border-b border-slate-800 backdrop-blur-[2px] py-3 px-4 sm:px-7 sticky top-0 z-30">
             {/* Left side bar */}
             <div className="flex items-center gap-5">
                 <button
                     onClick={() => setOpenSideMenu(!openSideMenu)}
-                    className="block lg:hidden text-black hover:bg-gray-100 p-1 rounded transition-colors">
+                    className="block lg:hidden text-slate-100 hover:bg-slate-800 p-1 rounded transition-colors">
                     {(openSideMenu ? (
                         <X className="text-2xl"/>
                     ): (
@@ -54,30 +54,30 @@ const MenuBar = ({openSideMenu, setOpenSideMenu}) => {
                     type="button"
                     onClick={handleBrandClick}
                     className="flex items-center gap-2 bg-transparent border-0 p-0 cursor-pointer focus:outline-none">
-                    <img src={assets.money_manager_logo} alt="Logo" className="h-40 w-55" />
+                    <img src={assets.money_manager_logo} alt="Logo" className="h-30 w-40" />
                 </button>
             </div>
 
             {/* right side */}
             <div className="relative" ref={dropdownRef}>
-                <button className="flex items-center justify-center w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-800 focus:ring-offset-2 cursor-pointer"
+                <button className="flex items-center justify-center w-10 h-10 bg-slate-800 hover:bg-slate-700 rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-offset-2 focus:ring-offset-slate-950 cursor-pointer"
                         onClick={() => setShowDropdown(!showDropdown)}>
-                    <User className="text-purple-500" />
+                    <User className="text-teal-300" />
                 </button>
 
                 {/* dropdown menu */}
                 {showDropdown && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg py-1 z-50">
-                        <div className="px-4 py-3 border-b border-gray-100">
+                    <div className="absolute right-0 mt-2 w-48 bg-slate-900 border border-slate-700 rounded-lg shadow-lg shadow-slate-950/40 py-1 z-50">
+                        <div className="px-4 py-3 border-b border-slate-700">
                             <div className="flex items-center gap-3">
-                                <div className="flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full">
-                                    <User className="w-4 h-4 text-purple-600" />
+                                <div className="flex items-center justify-center w-8 h-8 bg-slate-800 rounded-full">
+                                    <User className="w-4 h-4 text-teal-300" />
                                 </div>
                                 <div className="flex-1 min-w-0">
-                                    <p className="text-sm font-medium text-gray-800 truncate">
+                                    <p className="text-sm font-medium text-slate-100 truncate">
                                         {displayName}
                                     </p>
-                                    <p className="text-xs text-gray-500 truncate">
+                                    <p className="text-xs text-slate-400 truncate">
                                         {displayEmail}
                                     </p>
                                 </div>
@@ -88,8 +88,8 @@ const MenuBar = ({openSideMenu, setOpenSideMenu}) => {
                         <div className="py-1">
                             <button
                                 onClick={handleLogout}
-                                className="flex items-center gap-3 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors duration-150 cursor-pointer">
-                                <LogOut className="w-4 h-4 text-gray-500" />
+                                className="flex items-center gap-3 w-full px-4 py-2 text-sm text-slate-200 hover:bg-slate-800 transition-colors duration-150 cursor-pointer">
+                                <LogOut className="w-4 h-4 text-slate-400" />
                                 Logout
                             </button>
                         </div>

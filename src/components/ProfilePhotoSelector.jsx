@@ -65,12 +65,12 @@ const ProfilePhotoSelector = ({image, setImage}) => {
             />
 
             {!previewUrl ? (
-                <div className="relative flex h-24 w-24 items-center justify-center rounded-full border-2 border-dashed border-slate-300 bg-slate-100">
+                <div className="relative flex h-24 w-24 items-center justify-center rounded-full border-2 border-dashed border-slate-600 bg-slate-800">
                     <User className="text-slate-400" size={40} />
                     <button
                         type="button"
                         onClick={onChooseFile}
-                        className="absolute -bottom-1 -right-1 flex h-9 w-9 items-center justify-center rounded-full bg-blue-600 text-white shadow-md transition hover:bg-blue-700 cursor-pointer"
+                        className="absolute -bottom-1 -right-1 flex h-9 w-9 items-center justify-center rounded-full bg-teal-600 text-white shadow-md transition hover:bg-teal-700 cursor-pointer"
                         aria-label="Upload profile photo"
                     >
                         <Camera size={16} />
@@ -81,7 +81,7 @@ const ProfilePhotoSelector = ({image, setImage}) => {
                     <img
                         src={previewUrl}
                         alt="Profile preview"
-                        className="h-24 w-24 rounded-full border border-slate-200 object-cover shadow-sm"
+                        className="h-24 w-24 rounded-full border border-slate-700 object-cover shadow-sm"
                     />
                     <button
                         type="button"

@@ -49,19 +49,19 @@ const Home = () => {
                             icon={<WalletCards />}
                             label="Total Balance"
                             value={dashboardData?.totalBalance || 0}
-                            color="bg-purple-800"
+                            color="bg-teal-600"
                         />
                         <InfoCard
                             icon={<Wallet />}
                             label="Total Income"
                             value={dashboardData?.totalIncome || 0}
-                            color="bg-purple-800"
+                            color="bg-teal-600"
                         />
                         <InfoCard
                             icon={<Coins />}
                             label="Total Expense"
                             value={dashboardData?.totalExpense || 0}
-                            color="bg-purple-800"
+                            color="bg-teal-600"
                         />
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">

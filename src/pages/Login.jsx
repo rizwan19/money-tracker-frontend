@@ -77,10 +77,10 @@ const Login = () => {
                  className="absolute inset-0 w-full h-full object-cover filter blur-sm pointer-events-none"/>
             <div className="relative z-10 w-full max-w-lg  px-6">
                 <div
-                    className="bg-white bg-opacity-95 backdrop-blur-sm rounded-lg shadow-2xl p-8 max-h-[90vh] overflow-y-auto">
-                    <h3 className="text-2xl font-semibold text-black text-center mb-2">
+                    className="bg-slate-900/95 border border-slate-700 backdrop-blur-sm rounded-lg shadow-2xl shadow-slate-950/40 p-8 max-h-[90vh] overflow-y-auto">
+                    <h3 className="text-2xl font-semibold text-slate-50 text-center mb-2">
                         Welcome Back!</h3>
-                    <p className="text-sm text-slate-700 text-center mb-8">
+                    <p className="text-sm text-slate-300 text-center mb-8">
                         Please enter your details to login
                     </p>
                     <form onSubmit={handleSubmit} className="space-y-4">
@@ -99,7 +99,7 @@ const Login = () => {
                             type="password"
                         />
                         {error && (
-                            <p className="text-red-500 text-sm text-center bg-red-50 p-2 rounded">{error}</p>
+                            <p className="text-red-200 text-sm text-center bg-red-950/70 border border-red-900 p-2 rounded">{error}</p>
                         )}
                         <button
                             disabled={isLoading}
@@ -112,10 +112,10 @@ const Login = () => {
                                 </>
                             ) : "Login"}
                         </button>
-                        <p className="text-sm text-slate-800 text-center mt-6">
+                        <p className="text-sm text-slate-300 text-center mt-6">
                             Don't have an account?
                             <Link to="/signup"
-                                  className="font-medium text-blue-600 underline hover:text-blue-700 transition-colors">Signup</Link>
+                                  className="font-medium text-teal-300 underline hover:text-teal-200 transition-colors">Signup</Link>
                         </p>
                     </form>
                 </div>

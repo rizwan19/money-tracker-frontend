@@ -73,10 +73,10 @@ const Signup = () => {
         <div className="h-screen w-full relative flex items-center justify-center overflow-hidden">
             <img src={assets.login_bg} alt="background" className="absolute inset-0 w-full h-full object-cover filter blur-sm pointer-events-none"/>
             <div className="relative z-10 w-full max-w-lg  px-6">
-                <div className="bg-white bg-opacity-95 backdrop-blur-sm rounded-lg shadow-2xl p-8 max-h-[90vh] overflow-y-auto">
-                    <h3 className="text-2xl font-semibold text-black text-center mb-2">
+                <div className="bg-slate-900/95 border border-slate-700 backdrop-blur-sm rounded-lg shadow-2xl shadow-slate-950/40 p-8 max-h-[90vh] overflow-y-auto">
+                    <h3 className="text-2xl font-semibold text-slate-50 text-center mb-2">
                         Create an Account</h3>
-                    <p className="text-sm text-slate-700 text-center mb-8">
+                    <p className="text-sm text-slate-300 text-center mb-8">
                         Start tracking your expense by joining with us.
                     </p>
                     <form className="space-y-4" onSubmit={handleSignup}>
@@ -111,7 +111,7 @@ const Signup = () => {
                             />
                         </div>
                         {error && (
-                            <p className="text-red-500 text-sm text-center bg-red-50 p-2 rounded">{error}</p>
+                            <p className="text-red-200 text-sm text-center bg-red-950/70 border border-red-900 p-2 rounded">{error}</p>
                         )}
                         <button
                             disabled={isLoading}
@@ -126,9 +126,9 @@ const Signup = () => {
                                 "Signup"
                             )}
                         </button>
-                        <p className="text-sm text-slate-800 text-center mt-6">
+                        <p className="text-sm text-slate-300 text-center mt-6">
                             Already have an account?
-                            <Link to="/login" className="font-medium text-blue-600 underline hover:text-blue-700 transition-colors">Login</Link>
+                            <Link to="/login" className="font-medium text-teal-300 underline hover:text-teal-200 transition-colors">Login</Link>
                         </p>
                     </form>
                 </div>

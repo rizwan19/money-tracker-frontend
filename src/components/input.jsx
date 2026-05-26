@@ -10,7 +10,7 @@ const Input = ({label, value, onchange, placeholder, type, isSelect, options}) =
 
     return (
         <div className="mb-4">
-            <label className="text-[13px] text-slate-800 block mb-1">
+            <label className="text-[13px] text-slate-200 block mb-1">
                 {label}
             </label>
             <div className="relative">
@@ -18,7 +18,7 @@ const Input = ({label, value, onchange, placeholder, type, isSelect, options}) =
                     <select
                         value={value}
                         onChange={(e) => onchange(e)}
-                        className="w-full bg-transparent outline-none border border-gray-300 rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500">
+                        className="w-full bg-slate-950/60 outline-none border border-slate-700 rounded-md py-2 px-3 text-slate-100 placeholder:text-slate-500 leading-tight focus:outline-none focus:border-teal-400">
                         {options.map((option) => (
                             <option key={option.value} value={option.value}>
                                 {option.label}
@@ -27,7 +27,7 @@ const Input = ({label, value, onchange, placeholder, type, isSelect, options}) =
                     </select>
                 ) : (
                     <input
-                        className="w-full bg-transparent outline-none border border-gray-300 rounded-md py-2 px-3 pr-10 text-gray-700 leading-tight focus:outline-none focus:border-blue-500"
+                        className="w-full bg-slate-950/60 outline-none border border-slate-700 rounded-md py-2 px-3 pr-10 text-slate-100 placeholder:text-slate-500 leading-tight focus:outline-none focus:border-teal-400"
                         type={type === 'password' ? (showPassword ? 'text' : 'password') : type}
                         placeholder={placeholder}
                         value={value}
@@ -39,13 +39,13 @@ const Input = ({label, value, onchange, placeholder, type, isSelect, options}) =
                         {showPassword ? (
                             <Eye
                                 size={20}
-                                className="text-purple-600"
+                                className="text-teal-300"
                                 onClick={toggleShowPassword}
                             />
                         ) : (
                             <EyeOff
                                 size={20}
-                                className="text-slate-400"
+                                className="text-slate-500"
                                 onClick={toggleShowPassword}
                             />
                             )}

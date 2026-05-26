@@ -68,11 +68,11 @@ const ActivationAccount = () => {
                 className="absolute inset-0 w-full h-full object-cover filter blur-sm pointer-events-none"
             />
             <div className="relative z-10 w-full max-w-lg px-6">
-                <div className="bg-white bg-opacity-95 backdrop-blur-sm rounded-lg shadow-2xl p-8 text-center">
-                    <h1 className="text-2xl font-semibold text-black mb-4">{title}</h1>
-                    <p className="text-slate-700">{message}</p>
+                <div className="bg-slate-900/95 border border-slate-700 backdrop-blur-sm rounded-lg shadow-2xl shadow-slate-950/40 p-8 text-center">
+                    <h1 className="text-2xl font-semibold text-slate-50 mb-4">{title}</h1>
+                    <p className="text-slate-300">{message}</p>
                     {status !== "loading" && (
-                        <p className="text-sm text-slate-500 mt-4">
+                        <p className="text-sm text-slate-400 mt-4">
                             Redirecting to login in 3 seconds...
                         </p>
                     )}

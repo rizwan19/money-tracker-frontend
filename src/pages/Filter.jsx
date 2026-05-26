@@ -113,7 +113,7 @@ const Filter = () => {
                             </div>
                             <button
                                 onClick={handleSearch}
-                                className="ml-2 mb-1 p-2 bg-purple-800 hover:bg-purple-800 text-white rounded flex items-center justify-center cursor-pointer">
+                                className="ml-2 mb-1 p-2 bg-teal-600 hover:bg-teal-700 text-white rounded flex items-center justify-center cursor-pointer">
                                 <Search size={20} />
                             </button>
                         </div>
@@ -124,12 +124,12 @@ const Filter = () => {
                         <h5 className="text-2xl font-semibold">Transactions</h5>
                     </div>
                     {transaction.length === 0 && !loading ? (
-                        <p className="text-gray-500">
+                        <p className="text-slate-400">
                             Select the filters and click search to filter the transactions
                         </p>
                     ) : ""}
                     {loading ? (
-                        <p className="text-gray-500"> Loading Transactions ...</p>
+                        <p className="text-slate-400"> Loading Transactions ...</p>
                     ) : ("")}
                     {transaction.map((transaction) => (
                         <TransactionInfoCard

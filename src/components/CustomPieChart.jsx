@@ -28,7 +28,7 @@ const renderCenterText = ({viewBox, label, totalAmount, showTextAnchor}) => {
             <tspan
                 x={cx}
                 dy="1.6em"
-                fill="#0f172a"
+                fill="#f8fafc"
                 fontSize={amountFontSize}
                 fontWeight="600"
                 lengthAdjust={amountTextLength ? "spacingAndGlyphs" : undefined}
@@ -106,16 +106,16 @@ const CustomPieChart = ({
                 {data.map((item, index) => (
                     <div
                         key={`${item?.name || "item"}-${index}`}
-                        className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2"
+                        className="rounded-xl border border-slate-700 bg-slate-800 px-3 py-2"
                     >
                         <div className="flex items-center gap-2">
                             <span
                                 className="h-2.5 w-2.5 rounded-full"
                                 style={{backgroundColor: colors[index % colors.length] || "#cbd5e1"}}
                             />
-                            <span className="text-xs text-slate-500">{item?.name}</span>
+                            <span className="text-xs text-slate-400">{item?.name}</span>
                         </div>
-                        <p className="mt-2 text-sm font-semibold text-slate-900">
+                        <p className="mt-2 text-sm font-semibold text-slate-50">
                             {formatAmount(item?.amount)}
                         </p>
                     </div>

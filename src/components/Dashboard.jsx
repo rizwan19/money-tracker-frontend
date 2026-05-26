@@ -21,7 +21,6 @@ const Dashboard = ({children, activeMenu}) => {
             }
         };
 
-        setIsDesktop(mediaQuery.matches);
         mediaQuery.addEventListener("change", handleChange);
 
         return () => mediaQuery.removeEventListener("change", handleChange);
@@ -44,7 +43,7 @@ const Dashboard = ({children, activeMenu}) => {
                         {children}
                     </div>
                     {!isDesktop && openSideMenu && (
-                        <div className="fixed left-0 right-0 bg-white border-b border-gray-200 top-[73px] z-20 lg:hidden">
+                        <div className="fixed left-0 right-0 bg-slate-950 border-b border-slate-800 top-[73px] z-20 lg:hidden">
                             <Sidebar
                                 activeMenu={activeMenu}
                                 onItemClick={() => setOpenSideMenu(false)}
