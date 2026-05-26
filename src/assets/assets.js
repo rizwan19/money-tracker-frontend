@@ -1,9 +1,9 @@
-import logo from './logo.png';
 import login_bg from './login_bg.jpg';
+import money_manager_logo from './money_manager_logo.png'
 
 export const assets = {
-    logo,
-    login_bg
+    login_bg,
+    money_manager_logo
 }
 
 export const SIDEBAR_DATA = [

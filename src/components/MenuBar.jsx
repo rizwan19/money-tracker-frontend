@@ -38,7 +38,7 @@ const MenuBar = ({openSideMenu, setOpenSideMenu}) => {
     }, [showDropdown]);
 
     return (
-        <div className="flex items-center justify-between gap-5 bg-white border border-b border-gray-200/50 backdrop-blur-[2px] py-4 px-4 sm:px-7 sticky top-0 z-30">
+        <div className="flex items-center justify-between gap-5 bg-white border border-b border-gray-200/50 backdrop-blur-[2px] py-3 px-4 sm:px-7 sticky top-0 z-30">
             {/* Left side bar */}
             <div className="flex items-center gap-5">
                 <button
@@ -54,8 +54,7 @@ const MenuBar = ({openSideMenu, setOpenSideMenu}) => {
                     type="button"
                     onClick={handleBrandClick}
                     className="flex items-center gap-2 bg-transparent border-0 p-0 cursor-pointer focus:outline-none">
-                    <img src={assets.logo} alt="Logo" className="h-10 w-10" />
-                    <span className="text-xl font-medium text-black truncate">Money Manager</span>
+                    <img src={assets.money_manager_logo} alt="Logo" className="h-40 w-55" />
                 </button>
             </div>
 
