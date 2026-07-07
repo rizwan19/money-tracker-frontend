@@ -3,9 +3,11 @@ import {AppContext} from "../context/AppContext.jsx";
 import {useNavigate} from "react-router-dom";
 import {LogOut, Menu, User, X} from "lucide-react";
 import {assets} from "../assets/assets.js";
+import ProfileModal from "./ProfileModal.jsx";
 
 const MenuBar = ({openSideMenu, setOpenSideMenu}) => {
     const [showDropdown, setShowDropdown] = useState(false);
+    const [openProfileModal, setOpenProfileModal] = useState(false);
     const dropdownRef = useRef(null);
     const {user, clearUser} = useContext(AppContext);
     const navigate = useNavigate();
@@ -24,6 +26,11 @@ const MenuBar = ({openSideMenu, setOpenSideMenu}) => {
         navigate("/dashboard");
     }
 
+    const handleOpenProfile = () => {
+        setShowDropdown(false);
+        setOpenProfileModal(true);
+    }
+
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -38,6 +45,7 @@ const MenuBar = ({openSideMenu, setOpenSideMenu}) => {
     }, [showDropdown]);
 
     return (
+        <>
         <div className="flex items-center justify-between gap-5 bg-slate-950/95 border-b border-slate-800 backdrop-blur-[2px] py-3 px-4 sm:px-7 sticky top-0 z-30">
             {/* Left side bar */}
             <div className="flex items-center gap-5">
@@ -68,11 +76,22 @@ const MenuBar = ({openSideMenu, setOpenSideMenu}) => {
                 {/* dropdown menu */}
                 {showDropdown && (
                     <div className="absolute right-0 mt-2 w-48 bg-slate-900 border border-slate-700 rounded-lg shadow-lg shadow-slate-950/40 py-1 z-50">
-                        <div className="px-4 py-3 border-b border-slate-700">
+                        <button
+                            type="button"
+                            onClick={handleOpenProfile}
+                            className="w-full px-4 py-3 text-left border-b border-slate-700 hover:bg-slate-800 transition-colors duration-150 cursor-pointer">
                             <div className="flex items-center gap-3">
-                                <div className="flex items-center justify-center w-8 h-8 bg-slate-800 rounded-full">
-                                    <User className="w-4 h-4 text-teal-300" />
-                                </div>
+                                {user?.profileImageUrl ? (
+                                    <img
+                                        src={user.profileImageUrl}
+                                        alt="Profile"
+                                        className="h-8 w-8 rounded-full border border-slate-700 object-cover"
+                                    />
+                                ) : (
+                                    <div className="flex items-center justify-center w-8 h-8 bg-slate-800 rounded-full">
+                                        <User className="w-4 h-4 text-teal-300" />
+                                    </div>
+                                )}
                                 <div className="flex-1 min-w-0">
                                     <p className="text-sm font-medium text-slate-100 truncate">
                                         {displayName}
@@ -82,7 +101,7 @@ const MenuBar = ({openSideMenu, setOpenSideMenu}) => {
                                     </p>
                                 </div>
                             </div>
-                        </div>
+                        </button>
 
                         {/* options */}
                         <div className="py-1">
@@ -98,6 +117,11 @@ const MenuBar = ({openSideMenu, setOpenSideMenu}) => {
             </div>
 
         </div>
+            <ProfileModal
+                isOpen={openProfileModal}
+                onClose={() => setOpenProfileModal(false)}
+            />
+        </>
     )
 }
 
