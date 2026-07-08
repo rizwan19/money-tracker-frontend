@@ -4,6 +4,8 @@ const CLOUDINARY_CLOUD_NAME = "dj1tayyvn";
 export const API_ENDPOINTS = {
     ACTIVATE: "/profile/activate",
     LOGIN: "/profile/login",
+    REFRESH_TOKEN: "/profile/refresh-token",
+    LOGOUT: "/profile/logout",
     REGISTER: "/profile/register",
     UPLOAD_IMAGE: `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
     GET_USER_INFO: "/profile/info",

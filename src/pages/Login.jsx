@@ -5,7 +5,8 @@ import Input from "../components/input.jsx";
 import {validateEmail} from "../util/validation.js";
 import axiosConfig from "../util/axiosConfig.jsx";
 import {API_ENDPOINTS} from "../util/apiEndpoints.js";
-import {AppContext} from "../context/AppContext.jsx";
+import {AppContext} from "../context/AppContext.js";
+import {setAccessToken} from "../util/authToken.js";
 import {LoaderCircle} from "lucide-react";
 import toast from "react-hot-toast";
 
@@ -53,9 +54,9 @@ const Login = () => {
                 email,
                 password
             })
-            const {token, user} = response.data;
-            if (token) {
-                localStorage.setItem("token", token);
+            const {accessToken, user} = response.data;
+            if (accessToken) {
+                setAccessToken(accessToken);
                 setUser(user);
                 navigate("/dashboard");
             }

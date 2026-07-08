@@ -8,7 +8,7 @@ import Input from "./input.jsx";
 import axiosConfig from "../util/axiosConfig.jsx";
 import {API_ENDPOINTS} from "../util/apiEndpoints.js";
 import uploadProfileImage from "../util/uploadProfileImage.js";
-import {AppContext} from "../context/AppContext.jsx";
+import {AppContext} from "../context/AppContext.js";
 
 const EMPTY_PROFILE = {
     fullName: "",
@@ -17,7 +17,7 @@ const EMPTY_PROFILE = {
 };
 
 const ProfileModal = ({isOpen, onClose}) => {
-    const {user, setUser, clearUser} = useContext(AppContext);
+    const {user, setUser, logout} = useContext(AppContext);
     const navigate = useNavigate();
     const [profile, setProfile] = useState(EMPTY_PROFILE);
     const [profileImage, setProfileImage] = useState(null);
@@ -148,8 +148,7 @@ const ProfileModal = ({isOpen, onClose}) => {
             toast.success("Profile updated successfully");
 
             if (shouldLogoutAfterSave) {
-                localStorage.clear();
-                clearUser();
+                await logout();
                 onClose();
                 navigate("/login", {replace: true});
                 return;

@@ -1,15 +1,15 @@
 import {useContext, useEffect} from "react";
-import {AppContext} from "../context/AppContext.jsx";
+import {AppContext} from "../context/AppContext.js";
 import {useNavigate} from "react-router-dom";
 import axiosConfig from "../util/axiosConfig.jsx";
 import {API_ENDPOINTS} from "../util/apiEndpoints.js";
 
 export const useUser = () => {
-    const {user, setUser, clearUser} = useContext(AppContext);
+    const {user, setUser, clearUser, authLoading} = useContext(AppContext);
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (user) {
+        if (authLoading || user) {
             return;
         }
         let isMounted = true;
@@ -33,5 +33,5 @@ export const useUser = () => {
         return () => {
             isMounted = false;
         }
-    }, [setUser, clearUser, navigate]);
+    }, [authLoading, user, setUser, clearUser, navigate]);
 }

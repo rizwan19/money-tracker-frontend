@@ -1,7 +1,8 @@
 import {useContext, useEffect, useRef, useState} from "react";
-import {AppContext} from "../context/AppContext.jsx";
+import {AppContext} from "../context/AppContext.js";
 import {useNavigate} from "react-router-dom";
 import {LogOut, Menu, User, X} from "lucide-react";
+import toast from "react-hot-toast";
 import {assets} from "../assets/assets.js";
 import ProfileModal from "./ProfileModal.jsx";
 
@@ -9,16 +10,19 @@ const MenuBar = ({openSideMenu, setOpenSideMenu}) => {
     const [showDropdown, setShowDropdown] = useState(false);
     const [openProfileModal, setOpenProfileModal] = useState(false);
     const dropdownRef = useRef(null);
-    const {user, clearUser} = useContext(AppContext);
+    const {user, logout} = useContext(AppContext);
     const navigate = useNavigate();
     const displayName = user?.fullName || "Guest User";
     const displayEmail = user?.email || "Not signed in";
 
-    const handleLogout = () => {
-        localStorage.clear();
-        clearUser();
-        setShowDropdown(false);
-        navigate("/login");
+    const handleLogout = async () => {
+        try {
+            await logout();
+            setShowDropdown(false);
+            navigate("/login");
+        } catch (error) {
+            toast.error(error.message || "Failed to log out, try again");
+        }
     }
 
     const handleBrandClick = () => {
